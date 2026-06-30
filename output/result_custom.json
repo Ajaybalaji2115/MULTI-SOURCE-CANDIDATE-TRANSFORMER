@@ -1,0 +1,43 @@
+{
+  "full_name": "Priya Sharma",
+  "primary_email": "ajay.balaji@gmail.com",
+  "phone": "+919876543210",
+  "company": "Eightfold AI",
+  "title": "Software Engineer Intern",
+  "skills": [
+    "SQL",
+    "Python",
+    "React",
+    "Machine Learning",
+    "Docker",
+    "NLP",
+    "TensorFlow",
+    "Spark",
+    "FastAPI",
+    "Languages: Python",
+    "JavaScript",
+    "TypeScript",
+    "Go",
+    "Frameworks: React",
+    "Django",
+    "Tools: Docker",
+    "Kubernetes",
+    "Git",
+    "AWS",
+    "Redis",
+    "Kafka",
+    "Ml/Ai: Tensorflow",
+    "PyTorch",
+    "Scikit-learn",
+    "Pandas",
+    "NumPy"
+  ],
+  "github": "https://github.com/ajaybalaji",
+  "overall_confidence": 0.8097,
+  "_pipeline_meta": {
+    "sources_processed": 4,
+    "raw_fields_extracted": 77,
+    "validation_warnings": [],
+    "validation_errors": []
+  }
+}

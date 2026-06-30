@@ -1,0 +1,11 @@
+{
+  "csv": 0.90,
+  "ats_json": 0.85,
+  "github": 0.75,
+  "linkedin": 0.70,
+  "resume": 0.65,
+  "text_notes": 0.60,
+  "agreement_bonus": 0.05,
+  "max_confidence": 1.0,
+  "_note": "These are heuristic starting points. They can be tuned or learned from historical data comparing extracted values against known ground-truth profiles."
+}

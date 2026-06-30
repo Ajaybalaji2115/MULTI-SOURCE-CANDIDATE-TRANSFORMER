@@ -1,0 +1,76 @@
+[
+  {
+    "applicant_name": "Ajay Balaji",
+    "contact_email": "ajay.balaji@gmail.com",
+    "contact_phone": "09876543210",
+    "org": "Eightfold AI",
+    "role": "Software Engineer Intern",
+    "country_of_origin": "India",
+    "city": "Chennai",
+    "profile_url": "https://github.com/ajaybalaji",
+    "summary": "Passionate about building scalable systems. Experienced in Python, React, and ML pipelines.",
+    "skill_tags": ["Python", "React", "Machine Learning", "SQL", "Docker"],
+    "work_history": [
+      {
+        "employer": "Eightfold AI",
+        "position": "Software Engineer Intern",
+        "from": "Jun 2026",
+        "to": "Dec 2026"
+      },
+      {
+        "employer": "StartupXYZ",
+        "position": "Full Stack Developer",
+        "from": "Jan 2025",
+        "to": "May 2026"
+      }
+    ],
+    "academic_history": [
+      {
+        "school": "IIT Madras",
+        "qualification": "B.Tech",
+        "subject": "Computer Science",
+        "grad_year": 2025
+      }
+    ]
+  },
+  {
+    "applicant_name": "Priya Sharma",
+    "contact_email": "priya.sharma@outlook.com",
+    "contact_phone": "+919123456789",
+    "org": "Google",
+    "role": "Senior Data Scientist",
+    "country_of_origin": "India",
+    "city": "Bangalore",
+    "profile_url": null,
+    "summary": "Data scientist with 6+ years experience in ML and NLP. Led teams building recommendation systems.",
+    "skill_tags": ["Python", "ML", "NLP", "TensorFlow", "Spark", "SQL"],
+    "work_history": [
+      {
+        "employer": "Google",
+        "position": "Senior Data Scientist",
+        "from": "2021-03",
+        "to": null
+      },
+      {
+        "employer": "Flipkart",
+        "position": "Data Scientist",
+        "from": "2018-07",
+        "to": "2021-02"
+      }
+    ],
+    "academic_history": [
+      {
+        "school": "IISc Bangalore",
+        "qualification": "M.Tech",
+        "subject": "AI & Machine Learning",
+        "grad_year": 2018
+      },
+      {
+        "school": "Delhi University",
+        "qualification": "B.Sc",
+        "subject": "Mathematics",
+        "grad_year": 2016
+      }
+    ]
+  }
+]

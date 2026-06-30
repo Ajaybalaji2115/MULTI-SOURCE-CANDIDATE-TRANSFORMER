@@ -1,0 +1,36 @@
+Ajay Balaji
+ajay.balaji@gmail.com | +91-98765-43210 | Chennai, India
+GitHub: https://github.com/ajaybalaji | LinkedIn: https://linkedin.com/in/ajaybalaji
+
+SUMMARY
+Software Engineer with 2 years of experience building scalable backend systems and ML pipelines.
+Passionate about data engineering, distributed systems, and open-source development.
+
+SKILLS
+Languages: Python, JavaScript, TypeScript, SQL, Go
+Frameworks: React, FastAPI, Django, Node.js
+Tools: Docker, Kubernetes, Git, AWS, Redis, Kafka
+ML/AI: TensorFlow, PyTorch, scikit-learn, Pandas, NumPy
+
+EXPERIENCE
+Software Engineer Intern | Eightfold AI | Jun 2026 - Dec 2026
+- Building the multi-source candidate data transformer pipeline
+- Designed normalization and merge layers for candidate profiles
+- Implemented configurable projection layer using runtime JSON config
+
+Full Stack Developer | StartupXYZ | Jan 2025 - May 2026
+- Built REST APIs in FastAPI serving 50K+ requests/day
+- Developed React frontend with real-time dashboard features
+- Set up CI/CD pipeline using Docker and GitHub Actions
+
+EDUCATION
+B.Tech in Computer Science | IIT Madras | 2021 - 2025
+GPA: 8.9/10 | Relevant coursework: Algorithms, Databases, ML, Distributed Systems
+
+PROJECTS
+- EduTrack: Real-time student analytics platform (Python, FastAPI, React, PostgreSQL)
+- MLPipe: Lightweight ML pipeline framework (Python, Docker)
+
+CERTIFICATIONS
+- AWS Certified Developer - Associate (2024)
+- Google Professional Data Engineer (2025)

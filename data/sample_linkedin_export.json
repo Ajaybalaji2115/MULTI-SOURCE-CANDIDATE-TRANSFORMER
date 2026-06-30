@@ -1,0 +1,49 @@
+{
+  "firstName": "Ajay",
+  "lastName": "Balaji",
+  "emailAddress": "ajay.balaji@gmail.com",
+  "phoneNumbers": [
+    { "type": "MOBILE", "number": "+91 98765 43210" }
+  ],
+  "headline": "Software Engineer Intern at Eightfold AI | IIT Madras CS '25",
+  "summary": "Passionate software engineer focused on data engineering and ML systems.",
+  "locationName": "Chennai, Tamil Nadu, India",
+  "geoCountryName": "India",
+  "positions": [
+    {
+      "title": "Software Engineer Intern",
+      "companyName": "Eightfold AI",
+      "startDate": { "month": 6, "year": 2026 },
+      "endDate": { "month": 12, "year": 2026 },
+      "description": "Multi-source candidate data transformation pipeline."
+    },
+    {
+      "title": "Full Stack Developer",
+      "companyName": "StartupXYZ",
+      "startDate": { "month": 1, "year": 2025 },
+      "endDate": { "month": 5, "year": 2026 },
+      "description": "Built scalable REST APIs and React dashboards."
+    }
+  ],
+  "educations": [
+    {
+      "schoolName": "IIT Madras",
+      "degreeName": "Bachelor of Technology",
+      "fieldOfStudy": "Computer Science and Engineering",
+      "startDate": { "year": 2021 },
+      "endDate": { "year": 2025 }
+    }
+  ],
+  "skills": [
+    { "name": "Python" },
+    { "name": "React" },
+    { "name": "Machine Learning" },
+    { "name": "FastAPI" },
+    { "name": "Docker" },
+    { "name": "SQL" }
+  ],
+  "websites": [
+    { "type": "PORTFOLIO", "url": "https://ajaybalaji.dev" },
+    { "type": "OTHER",     "url": "https://github.com/ajaybalaji" }
+  ]
+}
