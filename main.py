@@ -11,7 +11,7 @@ Usage examples:
 
   # Custom projected output
   python main.py --inputs data/sample_recruiter.csv data/sample_ats.json \\
-                 --github-url https://github.com/ajaybalaji \\
+                 --github-url https://github.com/Ajaybalaji2115 \\
                  --config configs/custom_config.json \\
                  --output result.json
 
@@ -23,7 +23,7 @@ Usage examples:
                            data/sample_ats.json \\
                            data/sample_resume.txt \\
                            data/sample_linkedin_export.json \\
-                 --github-url https://github.com/ajaybalaji \\
+                 --github-url https://github.com/Ajaybalaji2115 \\
                  --config configs/custom_config.json \\
                  --output output/result.json \\
                  --verbose

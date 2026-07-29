@@ -24,12 +24,12 @@ python main.py --inputs data/sample_recruiter.csv data/sample_ats.json --verbose
 
 # With a GitHub profile
 python main.py --inputs data/sample_recruiter.csv data/sample_ats.json \
-               --github-url https://github.com/ajaybalaji --verbose
+               --github-url https://github.com/Ajaybalaji2115 --verbose
 
 # Custom projected output (renamed, filtered fields)
 python main.py --inputs data/sample_recruiter.csv data/sample_ats.json \
                data/sample_resume.txt data/sample_linkedin_export.json \
-               --github-url https://github.com/ajaybalaji \
+               --github-url https://github.com/Ajaybalaji2115 \
                --config configs/custom_config.json \
                --output output/result.json \
                --verbose
@@ -200,12 +200,17 @@ Eight_Folds/
 │   ├── project.py          # Config-driven projection layer
 │   ├── validate.py         # Field + schema validation
 │   ├── pipeline.py         # Orchestrator
-│   └── extractors/
-│       ├── csv_extractor.py
-│       ├── json_extractor.py
-│       ├── github_extractor.py
-│       ├── linkedin_extractor.py
-│       └── text_extractor.py   (PDF / DOCX / TXT)
+│   ├── extractors/
+│   │   ├── csv_extractor.py
+│   │   ├── json_extractor.py
+│   │   ├── github_extractor.py
+│   │   ├── linkedin_extractor.py
+│   │   └── text_extractor.py   (PDF / DOCX / TXT)
+│   └── rag/
+│       ├── __init__.py         # Exposes query_rag API orchestrator
+│       ├── document_formatter.py # Formats canonical JSON profiles to Markdown
+│       ├── models.py           # Gemini API connections and local mock fallbacks
+│       └── vector_store.py     # Local file-based vector db and cosine similarity
 ├── data/
 │   ├── sample_recruiter.csv
 │   ├── sample_ats.json
@@ -221,13 +226,96 @@ Eight_Folds/
 │   ├── test_merge.py
 │   ├── test_extractors.py
 │   ├── test_projection.py
-│   └── test_validation.py
+│   ├── test_validation.py
+│   └── test_rag.py         # Unit tests for formatting, vector store and query models
 ├── main.py
+├── rag_tool.py             # CLI Search / Chatbot entrypoint
 ├── requirements.txt
 └── README.md
 ```
 
 ---
+
+## Retrieval-Augmented Generation (RAG) Architecture & Workflow
+
+To allow recruiters to search, query, and chat with candidate database using natural language, we have implemented a Retrieval-Augmented Generation (RAG) system.
+
+### 1. Workflow
+
+1. **Extraction & canonicalisation**: Raw candidate profiles are processed through the core pipeline (`DETECT → EXTRACT → NORMALIZE → MERGE → VALIDATE`).
+2. **Text Representation Conversion**: Each canonical JSON profile is converted into a dense, structured Markdown summary highlighting the candidate's skills, work experience history, education details, contact information, and pipeline-calculated confidence scores.
+3. **Index Generation**: 
+   - Embeddings are generated for the formatted candidate text.
+   - The vectors are saved alongside raw metadata in a local file-based vector store (`output/rag_index.json`).
+4. **Query & Retrieval**:
+   - The user inputs a natural language search query (e.g., *"Find software engineers with Go experience"*).
+   - The query is vectorized, and cosine similarity is calculated against all candidate vectors in the index file.
+   - The top $K$ matching profiles are retrieved.
+5. **Context Formulation & Generation**:
+   - The retrieved profiles are formatted into a prompt context template.
+   - The prompt and query are sent to the LLM to generate a professional, fact-based response.
+
+### 2. Models & Libraries Used
+
+| Component | Standard Model / Engine | Fallback / Local Mode |
+|---|---|---|
+| **Text Vectorization** | Google Gemini `models/text-embedding-004` (768-dim) | Deterministic local hashing vectorizer (768-dim) |
+| **Response Generation** | Google Gemini `models/gemini-1.5-flash` | Local keyword-extraction and profile highlight generator |
+| **Phone Normalization** | Google's `phonenumbers` parsing engine (E.164) | Heuristic clean-up regex |
+| **Country Verification** | `pycountry` search_fuzzy validator | Hardcoded alias dictionary lookup |
+| **Temporal Standardization**| `python-dateutil` date parser | Regex-based date formatting |
+| **Fuzzy Skill Merging** | `rapidfuzz` Levenshtein similarity distance | Exact / case-insensitive alias lookups |
+
+### 3. Detailed Architecture
+
+```mermaid
+graph TB
+    subgraph Data Transformation Ingestion Pipeline
+        A[Input Source Files] --> B[detect_source_type]
+        B --> C[Extractor Module]
+        C --> D[normalize_fields]
+        D --> E[merge & Union-Find grouping]
+        E --> F[validate_profile]
+        F --> G[project outputs]
+    end
+    
+    subgraph RAG Indexing & Storage
+        G --> H[document_formatter.py]
+        H --> I[get_embedding via text-embedding-004]
+        I --> J[(vector_store.py: rag_index.json)]
+    end
+    
+    subgraph RAG Search & Generation
+        K[User CLI Query] --> L[get_query_embedding]
+        L --> M[Cosine Similarity calculation]
+        J --> M
+        M --> N[Retrieve Top-K Profiles]
+        N --> O[Format Prompt Context]
+        O --> P[gemini-1.5-flash generator]
+        P --> Q[Natural Language Response]
+    end
+```
+
+### 4. RAG CLI reference (`rag_tool.py`)
+
+```
+python rag_tool.py [-h]
+                   [--index CANONICAL_JSON]
+                   [--query QUERY_STRING]
+                   [--interactive]
+                   [--db DB_PATH]
+                   [--limit LIMIT]
+                   [--verbose]
+```
+
+- `--index`: Rebuilds the RAG index using the output generated from the canonical transformer (e.g. `output/result.json`).
+- `--query`: Runs a single natural language semantic query and generates a response.
+- `--interactive` / `-i`: Starts an interactive recruiting chatbot console.
+- `--db`: Path to read/write the vector index (default: `output/rag_index.json`).
+- `--limit` / `-l`: Maximum candidate profiles to inject into context (default: 3).
+
+---
+
 
 ## Assumptions & Descoped Items
 

@@ -54,7 +54,7 @@ class GitHubExtractor(BaseExtractor):
     def extract(self, source: str) -> List[RawField]:
         """
         *source* must be a GitHub profile URL or username string.
-        e.g. "https://github.com/ajaybalaji" or "ajaybalaji"
+        e.g. "https://github.com/Ajaybalaji2115" or "Ajaybalaji2115"
         """
         username = self._parse_username(source)
         if not username:

@@ -10,7 +10,7 @@ Usage:
     from pipeline import run_pipeline
     result = run_pipeline(
         inputs=["data/sample_recruiter.csv", "data/sample_ats.json"],
-        github_url="https://github.com/ajaybalaji",
+        github_url="https://github.com/Ajaybalaji2115",
         config_path="configs/custom_config.json",
     )
 """
@@ -54,68 +54,6 @@ def _build_extractor(source_type: str, weights: Dict[str, float]) -> Optional[Ba
     return cls(confidence_weights=weights)
 
 
-# ---------------------------------------------------------------------------
-# Main pipeline function
-# ---------------------------------------------------------------------------
-
-def run_pipeline(
-    inputs: List[str],
-    github_url: Optional[str] = None,
-    config_path: Optional[str] = None,
-    verbose: bool = False,
-) -> Dict[str, Any]:
-    """
-    Run the full candidate data transformation pipeline.
-
-    Parameters
-    ----------
-    inputs      : list of file paths (CSV, JSON, PDF, DOCX, TXT)
-    github_url  : optional GitHub profile URL or username
-    config_path : path to a projection config JSON (default: default_config.json)
-    verbose     : if True, emit INFO-level logs to stdout
-
-    Returns
-    -------
-    dict — the projected, validated output JSON-serialisable dict
-    """
-    if verbose:
-        logging.basicConfig(level=logging.INFO,
-                            format="%(levelname)s [%(name)s] %(message)s")
-
-    # ── Load configuration & weights ─────────────────────────────────────────
-    config  = load_config(config_path)
-    weights = _load_weights()
-    skill_lookup = _load_skill_lookup()
-
-    # ── Build source list (files + optional GitHub URL) ───────────────────────
-    sources: List[str] = list(inputs)
-    if github_url:
-        sources.append(github_url)
-
-    # ── DETECT & EXTRACT ─────────────────────────────────────────────────────
-    all_raw_fields: List[RawField] = []
-
-    for source in sources:
-        source_type = detect_source_type(source)
-        logger.info("Detected '%s' → type: %s", source, source_type)
-
-        extractor = _build_extractor(source_type, weights)
-        if extractor is None:
-            logger.warning("No extractor for source type '%s' ('%s') — skipped",
-                           source_type, source)
-            continue
-
-        try:
-            raw_fields = extractor.extract(source)
-            logger.info("  Extracted %d raw fields", len(raw_fields))
-            all_raw_fields.extend(raw_fields)
-        except Exception as exc:
-            # A well-behaved extractor should never raise, but belt-and-suspenders
-            logger.error("  Extractor error for '%s': %s — skipped", source, exc)
-
-    if not all_raw_fields:
-        logger.warning("No fields extracted from any source — returning empty profile")
-        return {"candidate_id": "", "error": "no_data_extracted"}
 
 def group_fields_by_candidate(all_fields: List[RawField]) -> List[List[RawField]]:
     """
